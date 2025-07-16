@@ -108,6 +108,8 @@ p {
   width: 80%;
   max-width: 1000px;
   margin: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 .corner {
   background: #ffffffcc;
@@ -145,6 +147,29 @@ p {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
+  .intro-wrapper {
+  padding-top: calc(60px + env(safe-area-inset-top));
+  padding-bottom: 20px;
+  overflow: hidden;
+  }
+
+  .four-corners {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .corner {
+    min-width: 80%;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+  }
+
 }
 .intro-combined {
   background: linear-gradient(to bottom, #fff 60%, #fef0f5 100%);

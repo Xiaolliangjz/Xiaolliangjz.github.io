@@ -62,6 +62,20 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     document.getElementById("proProfile")?.classList.add("visible");
   }, 1200);
+
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  const sectionColors = {
+    intro: '#fff0f5',
+    panda: '#e0f7fa',
+    hawaii: '#fafafa',
+  };
+
+  function updateThemeColor(sectionId) {
+    const color = sectionColors[sectionId] || '#ffffff';
+    themeMeta.setAttribute('content', color);
+  }
+
 });
 window.addEventListener("resize", () => {
   document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`);
