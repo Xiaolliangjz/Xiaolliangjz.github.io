@@ -63,3 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("proProfile")?.classList.add("visible");
   }, 1200);
 });
+window.addEventListener("resize", () => {
+  document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`);
+});
+window.dispatchEvent(new Event('resize'));
