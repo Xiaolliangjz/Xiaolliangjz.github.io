@@ -1,70 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Liang Xiaolin – Stories of a Wanderer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#fafafa" id="theme-color-meta">
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Noto+Sans+JP&display=swap" rel="stylesheet" />
-  <script src="script.js" defer></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Mea+Culpa&family=Rubik+Spray+Paint&family=UnifrakturMaguntia&display=swap');
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiangXiaolin</title>
+    <style>
+        .mea-culpa-regular {
+            font-family: "Mea Culpa", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .rubik-spray-paint-regular {
+            font-family: "Rubik Spray Paint", system-ui;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .unifrakturmaguntia-regular {
+        font-family: "UnifrakturMaguntia", cursive;
+        font-weight: 400;
+        font-style: normal;
+        }
+
+        .ballet-name {
+            font-family: "Ballet", cursive;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        :root {
+            --line-color: rgba(147, 147, 147, 0.995);
+            --line-size: 1px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 1);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* First Section - Hero */
+        .hero-section {
+            height: 100vh;
+            background-image: url('photos/dsc.png');
+            background-color: rgba(0, 0, 0, 1);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .center-section {
+            width: 80%;
+            height: 70%;
+            position: relative;
+        }
+        
+        .center-section::before {
+            position: absolute;
+            content:"";
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            -webkit-filter: blur(1.3px);
+            -moz-filter: blur(1.3px);
+            -o-filter: blur(1.3px);
+            -ms-filter: blur(1.3px);
+            filter: blur(1.3px);
+            background-image: url('photos/rec.png');
+            background-color: rgba(0, 0, 0, 1);
+            background-blend-mode: lighten;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .center-section-inside {
+            position: relative;
+            color: #FFFFFF;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .center-section-inside h1 {
+            position: absolute;
+            top: -12vh;
+            left: -5vw;
+            font-size: 15vw;
+            font-weight: bolder;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            z-index: 2;
+        }
+
+        .center-section-inside #my-sec {
+            position: absolute;
+            bottom: 10vh;
+            right: 30vw;
+            font-weight: bolder;
+            font-size: 2vw;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        #my-sec > h2 {
+            margin-bottom:2vh;  
+            transform: translateX(-30px);        
+            opacity: 0;
+            animation: fadeSlideIn 0.6s ease-in forwards;
+            transition: transform 0.3s ease;
+        }
+        
+        #my-sec > h2:last-child {
+            margin-bottom: 0;
+        }
+
+        #my-sec > h2:nth-child(1) { animation-delay: 0.8s; }
+        #my-sec > h2:nth-child(2) { animation-delay: 0.4s; }
+        #my-sec > h2:nth-child(3) { animation-delay: 1.2s; }
+
+        @keyframes fadeSlideIn {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        #my-sec h2 span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        #my-sec h2:hover span {
+            transform: translateX(10px);
+        }
+
+        #animated-title {
+            display: inline-block;
+            transform-style: preserve-3d;
+            perspective: 800px;
+            transition: transform 0.1s ease;
+        }
+
+        #animated-title span {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 0.4s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+
+        /* Border box container */
+        .border-box {
+            position: absolute;
+            top:0; left: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .border-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -5vw;
+            height: var(--line-size);
+            width: calc(100% + 5vw);
+            background: var(--line-color);
+            opacity: 0;
+            animation: drawLine 1s forwards;
+            animation-delay: 0.2s;
+        }
+
+        .border-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: var(--line-size);
+            width: calc(100% + 5vw);
+            background: var(--line-color);
+            opacity: 0;
+            animation: drawLine 1.2s forwards;
+            animation-delay: 0.2s;
+        }
+
+        .line-left {
+            position: absolute;
+            left: 0;
+            top: -15vh;
+            width: var(--line-size);
+            height: calc(100% + 15vh);
+            background: var(--line-color);
+            opacity: 0;
+            animation: drawLine 0.6s forwards;
+            animation-delay: 0.4s;
+        }
+
+        .line-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: var(--line-size);
+            height: calc(100% + 15vh);
+            background: var(--line-color);
+            opacity: 0;
+            animation: drawLine 0.6s forwards;
+            animation-delay: 0.6s;
+        }
+        
+        .border-box,
+        .border-box::before,
+        .border-box::after,
+        .border-box .line-left,
+        #animated-title,
+        .border-box .line-right {
+            pointer-events: none;
+        }
+
+        @keyframes drawLine {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Content Sections */
+        .content-section {
+            min-height: 100vh;
+            padding: 80px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(40, 40, 40, 0.95));
+            position: relative;
+        }
+
+        .content-section:nth-child(even) {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(50, 50, 50, 0.95));
+        }
+
+        .content-container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .content-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-section h2 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .content-card p {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            display: block;
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .center-section-inside h1 {
+                font-size: 20vw;
+                top: -10vh;
+                left: -2vw;
+            }
+            
+            .center-section-inside #my-sec {
+                font-size: 4vw;
+                right: 20vw;
+                bottom: 15vh;
+            }
+            
+            .content-section h2 {
+                font-size: 2.5rem;
+            }
+            
+            .content-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Letter-by-letter animation
+            const title = document.getElementById("animated-title");
+            const text = title.textContent;
+            title.textContent = "";
+
+            [...text].forEach((char, index) => {
+                const span = document.createElement("span");
+                span.textContent = char;
+                span.style.animationDelay = `${index * 0.1}s`;
+                title.appendChild(span);
+            });
+
+            // Mouse-tracking animation
+            const heroSection = document.querySelector('.hero-section');
+
+            heroSection.addEventListener("mousemove", (e) => {
+                const { innerWidth: w, innerHeight: h } = window;
+                const x = (e.clientX - w / 2) / (w / 2);
+                const y = (e.clientY - h / 2) / (h / 2);
+
+                const rotateX = y * 15;
+                const rotateY = -x * 15;
+
+                title.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
+
+            heroSection.addEventListener("mouseleave", () => {
+                title.style.transform = `rotateX(0deg) rotateY(0deg) translateZ(0px)`;
+            });
+
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.content-container').forEach(container => {
+                observer.observe(container);
+            });
+        });
+    </script>
 </head>
 <body>
+    <section class="hero-section">
+        <div class="center-section">
+            <div class="center-section-inside">        
+                <h1 id="animated-title" class="ballet-name">
+                    Liang Xiaolin
+                </h1>
+                <div id="my-sec">
+                    <h2 class="rubik-spray-paint-regular"><span>Live</span></h2>
+                    <h2 class="rubik-spray-paint-regular"><span>Laugh</span></h2>
+                    <h2 class="rubik-spray-paint-regular"><span>Love</span></h2>
+                </div>
+            </div>
+            <div class="border-box">
+                <div class="line-left"></div>
+                <div class="line-right"></div>
+            </div>
+        </div>
+        <div class="scroll-indicator">Scroll down to explore</div>
+    </section>
 
-  <!-- Dot Navigation -->
-  <div id="dot-nav"></div>
+    <!-- Content Section 1 - About -->
+    <section class="content-section">
+        <div class="content-container">
+            <h2 class="ballet-name">About Me</h2>
+            <p>Welcome to my world. I'm passionate about creating beautiful experiences and meaningful connections. Here you'll discover my journey, my work, and the stories that shape who I am.</p>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Creative Vision</h3>
+                    <p>Bringing ideas to life through innovative design and thoughtful execution.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Meaningful Impact</h3>
+                    <p>Creating work that resonates and makes a difference in people's lives.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Continuous Growth</h3>
+                    <p>Always learning, evolving, and pushing the boundaries of what's possible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Story Sections -->
-  <section class="story intro-combined" id="intro">
-  <div class="intro-wrapper">
-    <div class="intro-header" id="introHeader">
-      <h1>🌸 Liang Xiaolin</h1>
-      <p>Hello! I'm a panda-loving, photography-obsessed explorer with a background in geography. Welcome to my story world!</p>
-    </div>
+    <!-- Content Section 2 - Portfolio -->
+    <section class="content-section">
+        <div class="content-container">
+            <h2 class="ballet-name">My Work</h2>
+            <p>A collection of projects that showcase my skills, creativity, and dedication to excellence. Each piece tells a unique story and represents a step in my creative journey.</p>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Project Alpha</h3>
+                    <p>An innovative solution that combines creativity with functionality to deliver exceptional user experiences.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Project Beta</h3>
+                    <p>A collaborative effort that pushed creative boundaries and resulted in award-winning design.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Project Gamma</h3>
+                    <p>A passion project that explores the intersection of art, technology, and human connection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="four-corners professional-profile" id="proProfile">
-      <div class="corner">
-        <i class="fas fa-graduation-cap"></i>
-        <h3>Education</h3>
-        <p>Geography B.A. — Melbourne University<br />Postgrad — NUS</p>
-      </div>
-      <div class="corner">
-        <i class="fas fa-briefcase"></i>
-        <h3>Experience</h3>
-        <p>Working in geo-intelligence and data visualization in Hong Kong.</p>
-      </div>
-      <div class="corner">
-        <i class="fas fa-tools"></i>
-        <h3>Skills</h3>
-        <p>Photography, GIS, Research, Storytelling, Multilingual</p>
-      </div>
-      <div class="corner">
-        <i class="fas fa-map-marker-alt"></i>
-        <h3>Location</h3>
-        <p>🌏 From China<br />📍 Based in Hong Kong</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <section class="story" id="panda">
-    <div class="content">
-      <h2>🐼 Panda Love</h2>
-      <p>Let me tell you about 花花 (Huahua), the adorable panda that stole my heart...</p>
-      <img src="photos/huahua.jpg" alt="Huahua Panda" class="photo" />
-    </div>
-  </section>
-
-  <section class="story" id="hawaii">
-    <div class="content">
-      <h2>🌺 Hawaii Memories</h2>
-      <p>During my trip to Hawaii, I captured sunsets, waves, and the aloha spirit. Here’s a glimpse...</p>
-      <img src="photos/hawaii1.png" alt="Hawaii beach" class="photo" />
-    </div>
-  </section>
-
-  <!-- You can add more stories like this! -->
-
+    <!-- Content Section 3 - Contact -->
+    <section class="content-section">
+        <div class="content-container">
+            <h2 class="ballet-name">Let's Connect</h2>
+            <p>I'm always excited to collaborate on new projects, share ideas, or simply have a meaningful conversation. Reach out and let's create something amazing together.</p>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Professional</h3>
+                    <p>Connect with me on professional platforms to explore collaboration opportunities.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Creative</h3>
+                    <p>Follow my creative journey and see behind-the-scenes of my latest projects.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Personal</h3>
+                    <p>Get to know the person behind the work through personal stories and insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
