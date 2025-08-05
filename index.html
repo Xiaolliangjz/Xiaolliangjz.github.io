@@ -6,7 +6,7 @@
 </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiangXiaolin</title>
+    <title>LiangXiaoling</title>
     <style>
         .mea-culpa-regular {
             font-family: "Mea Culpa", cursive;
@@ -291,6 +291,24 @@
             background-clip: text;
         }
 
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            margin: 30px auto;
+            display: block;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
         .content-section p {
             font-size: 1.2rem;
             line-height: 1.8;
@@ -436,11 +454,12 @@
     </script>
 </head>
 <body>
+    <!-- Hero Section (Your original design) -->
     <section class="hero-section">
         <div class="center-section">
             <div class="center-section-inside">        
                 <h1 id="animated-title" class="ballet-name">
-                    Liang Xiaolin
+                    Liang Xiaoling
                 </h1>
                 <div id="my-sec">
                     <h2 class="rubik-spray-paint-regular"><span>Live</span></h2>
@@ -460,6 +479,7 @@
     <section class="content-section">
         <div class="content-container">
             <h2 class="ballet-name">About Me</h2>
+            <img src="photos/me.jpg" alt="Liang Xiaoling" class="profile-image">
             <p>Welcome to my world. I'm passionate about creating beautiful experiences and meaningful connections. Here you'll discover my journey, my work, and the stories that shape who I am.</p>
             <div class="content-grid">
                 <div class="content-card">
